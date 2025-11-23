@@ -1,0 +1,12 @@
+  "The Sewers - BDE65CBAD11A80B3 - spn_d02_02_031 @ V3f(-70, 3.1, -40)",
+  "The Sewers - BDE65DBAD11A8266 - spn_d02_02_032 @ V3f(-80, 3.1, -30)",
+  "The Sewers - BDE65EBAD11A8419 - spn_d02_02_033 @ V3f(-76.97733, 3.1074047, -26.753216)",
+  "The Sewers - BDE9DEBAD11D9370 - spn_d02_02_023 @ V3f(-62.4699, 3.0331113, -23.7024)",
+  "The Sewers - BDE9DFBAD11D9523 - spn_d02_02_022 @ V3f(-0.44469738, -0.2396127, -42.71759)",
+  "The Sewers - BDE9E0BAD11D96D6 - spn_d02_02_021 @ V3f(-31.40034, 0.1, -46.06428)",
+  "The Sewers - BDED65BAD120AEAC - spn_d02_02_012 @ V3f(-37.968212, -0.245518, -90.30068)",
+  "The Sewers - BDED66BAD120B05F - spn_d02_02_013 @ V3f(-43.8499, -0.2528337, -90.04241)",
+  "The Sewers - BDED68BAD120B3C5 - spn_d02_02_011 @ V3f(-13.680779, -0.0080379, -55.98212)",
+  "The Sewers - BDF0ECBAD123C9E8 - spn_d02_02_001 @ V3f(-70, 3.1, -100)",
+  "The Sewers - BDF0EEBAD123CD4E - spn_d02_02_003 @ V3f(-70, 3.1, -80)",
+  "The Sewers - BDF0EFBAD123CF01 - spn_d02_02_002 @ V3f(-78, 3.1, -90)"

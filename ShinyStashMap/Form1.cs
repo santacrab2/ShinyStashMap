@@ -11,7 +11,11 @@ namespace ShinyStashMap;
 public partial class Form1 : Form
 {
     private ISaveFileProvider SAV { get; }
-    public Dictionary<string, (byte[], float[])> Spawners = [];
+    public Dictionary<string, (byte[], float[])> SpawnersLumiose = [];
+    public Dictionary<string, (byte[], float[])> SpawnersLysandre = [];
+    public Dictionary<string, (byte[], float[])> SpawnersSewers = [];
+    public Dictionary<string, (byte[], float[])> SpawnersSewersB = [];
+
     public List<(PA9, byte[])> ShinyEntities = [];
     public bot Bot = new();
     public Form1(ISaveFileProvider sav)
@@ -20,7 +24,16 @@ public partial class Form1 : Form
         InitializeComponent();
         var resourceText = Properties.Resources.t1_point_spawners;
         var Lines = resourceText.Replace("\r", "").Split('\n');
-        Spawners = ParseToDictionary(Lines);
+        SpawnersLumiose = ParseToDictionary(Lines);
+        resourceText = Properties.Resources.t2_point_spawners;
+        Lines = resourceText.Replace("\r", "").Split('\n');
+        SpawnersLysandre = ParseToDictionary(Lines);
+        resourceText = Properties.Resources.t3_point_spawners;
+        Lines = resourceText.Replace("\r", "").Split('\n');
+        SpawnersSewers = ParseToDictionary(Lines);
+        resourceText = Properties.Resources.t4_point_spawners;
+        Lines = resourceText.Replace("\r", "").Split('\n');
+        SpawnersSewersB = ParseToDictionary(Lines);
         GetShinyBlock();
 
     }
@@ -30,7 +43,7 @@ public partial class Form1 : Form
             ShinyEntities.Clear();
         var ShinyBlock = ((SAV9ZA)SAV.SAV).Accessor.GetBlock(0xF3A8569D).Data;
         int i = 0;
-        while (BitConverter.ToString(ShinyBlock[i..(i + 8)].ToArray()) != "45262284E49CF2CB" && (i + 0x1F0) <= ShinyBlock.Length)
+        while (BitConverter.ToString(ShinyBlock[i..(i + 8)].ToArray()).Replace("-","") != "45262284E49CF2CB" && (i + 0x1F0) <= ShinyBlock.Length)
         {
             ShinyEntities.Add((new PA9(ShinyBlock[(i + 0x8)..(i + 0x8 + 0x158)].ToArray()), ShinyBlock[i..(i + 8)].ToArray()));
             i += 0x1F0;
@@ -43,17 +56,89 @@ public partial class Form1 : Form
         {
             ((PictureBox)groupBox1.Controls[i]).Image = ShinyEntities[i].Item1.Sprite();
             ((PictureBox)groupBox1.Controls[i]).Click += (s, _) => Renderpoint(groupBox1.Controls.IndexOf((Control)s));
+            ((PictureBox)groupBox1.Controls[i]).MouseClick += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    ToolStripMenuItem Teleport = new("Teleport");
+                    Teleport.Click += (_, _) => Teleporter(groupBox1.Controls.IndexOf((Control)s));
+                    ContextMenuStrip menu = new();
+                    menu.Items.Add(Teleport);
+                    ContextMenuStrip = menu;
+                }
+            };
+        }
+    }
+    public void Teleporter(int index)
+    {
+        var hash = BitConverter.ToString(ShinyEntities[index].Item2.Reverse().ToArray()).Replace("-", "");
+        byte[] coords = [];
+        if (SpawnersLumiose.TryGetValue(hash, out (byte[], float[]) value))
+        {
+            coords = value.Item1;
+            var pt = Bot.FollowMainPointer([..PlayerPositionPointer]);
+            Bot.WriteBytes(coords, pt);
+        }
+        else if (SpawnersLysandre.TryGetValue(hash, out (byte[], float[]) value2))
+        {
+            coords = value2.Item1;
+            var pt = Bot.FollowMainPointer([.. PlayerPositionPointer]);
+            Bot.WriteBytes(coords, pt);
+        }
+        else if (SpawnersSewers.TryGetValue(hash, out (byte[], float[]) value3))
+        {
+            coords = value3.Item1;
+            var pt = Bot.FollowMainPointer([.. PlayerPositionPointer]);
+            Bot.WriteBytes(coords, pt);
+        }
+        else if (SpawnersSewersB.TryGetValue(hash, out (byte[], float[]) value4))
+        {
+            coords = value4.Item1;
+            var pt = Bot.FollowMainPointer([.. PlayerPositionPointer]);
+            Bot.WriteBytes(coords, pt);
         }
     }
     public void Renderpoint(int index)
     {
         var hash = BitConverter.ToString(ShinyEntities[index].Item2.Reverse().ToArray()).Replace("-", "");
-        var coords = Spawners[hash].Item2;
-        var img = Resources.lumiose;
-        using var gr = Graphics.FromImage(img);
-        pictureBox1.BackgroundImage = img;
-        using var brush = new SolidBrush(Color.Red);
-        RenderPoints(gr, TransformLumiose, brush, new Point(coords[0], coords[2]));
+        float[] coords = [];
+        if (SpawnersLumiose.TryGetValue(hash, out (byte[], float[]) value))
+        {
+            coords = value.Item2;
+            var img = Resources.lumiose;
+            using var gr = Graphics.FromImage(img);
+            pictureBox1.BackgroundImage = img;
+            using var brush = new SolidBrush(Color.Red);
+            RenderPoints(gr, TransformLumiose, brush, new Point(coords[0], coords[2]));
+        }
+        else if (SpawnersLysandre.TryGetValue(hash, out (byte[], float[]) value2))
+        {
+            coords = value2.Item2;
+            var img = Resources.LysandreLabs;
+            using var gr = Graphics.FromImage(img);
+            pictureBox1.BackgroundImage = img;
+            using var brush = new SolidBrush(Color.Red);
+            RenderPoints(gr, TransformLysandreLabs, brush, new Point(coords[0], coords[2]));
+        }
+        else if (SpawnersSewers.TryGetValue(hash, out (byte[], float[]) value3))
+        {
+            coords = value3.Item2;
+            var img = Resources.Sewers;
+            using var gr = Graphics.FromImage(img);
+            pictureBox1.BackgroundImage = img;
+            using var brush = new SolidBrush(Color.Red);
+            RenderPoints(gr, TransformLysandreLabs, brush, new Point(coords[0], coords[2]));
+        }
+        else if (SpawnersSewersB.TryGetValue(hash, out (byte[], float[]) value4))
+        {
+            coords = value4.Item2;
+            var img = Resources.SewersB;
+            using var gr = Graphics.FromImage(img);
+            pictureBox1.BackgroundImage = img;
+            using var brush = new SolidBrush(Color.Red);
+            RenderPoints(gr, TransformLysandreLabs, brush, new Point(coords[0], coords[2]));
+        }
+
 
     }
     public static float x;
@@ -106,7 +191,29 @@ public partial class Form1 : Form
        Dir: new(-1.0, -1.0),
        Offset: new(500.0, 500.0)
    );
+    public static readonly MapTransform TransformLysandreLabs = new(
+        Texture: new(2160.0, 2160.0),
+        Range: new(1662.0, 2041.0),
+        Scale: new(1662.0 / 10.291021, 2041.0 / 10.291021),
+        Dir: new(-1.0, -1.0),
+        Offset: new(-3.0, -80.0)
+    );
 
+    public static readonly MapTransform TransformSewersCh5 = new(
+        Texture: new(2160.0, 2160.0),
+        Range: new(1364.0, 1975.0),
+        Scale: new(1364.0 / 6.2, 1975.0 / 6.2),
+        Dir: new(1.0, 1.0),
+        Offset: new(1.0, 146.0)
+    );
+
+    public static readonly MapTransform TransformSewersCh6 = new(
+        Texture: new(2160.0, 2160.0),
+        Range: new(1521.0, 1966.0),
+        Scale: new(1521.0 / 16.714285, 1966.0 / 16.714285),
+        Dir: new(1.0, 1.0),
+        Offset: new(39.0, 45.0)
+    );
     private void button1_Click(object sender, EventArgs e)
     {
         Bot.Connect(textBox1.Text, 6000);
@@ -122,9 +229,16 @@ public partial class Form1 : Form
         GetShinyBlock();
     }
     public static IReadOnlyList<long> ShinyStashPointer { get; } = [0x5F0C250, 0x120, 0x168, 0x0];
+    public static IReadOnlyList<long> PlayerPositionPointer { get; } = [0x41ED340, 0x248, 0x00, 0x138, 0x90];
     protected override void OnClosing(CancelEventArgs e)
     {
-        Bot.Disconnect();
+        try
+        {
+            Bot.Disconnect();
+        }catch (SocketException)
+        {
+            // ignore
+        }
         base.OnClosing(e);
     }
 }

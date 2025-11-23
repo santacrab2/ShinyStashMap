@@ -93,11 +93,25 @@ public class bot
             bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
         return bytes;
     }
+    public ulong FollowMainPointer(long[] jumps)
+    {
+        lock (_sync)
+        {
+            var cmd = MainPointer(jumps);
+            SendInternal(cmd);
+
+            // give it time to push data back
+            Thread.Sleep(1);
+            var buffer = new byte[17];
+            var _ = ReadInternal(buffer);
+            var bytes = ConvertHexByteStringToBytes(buffer);
+            bytes = [.. bytes.Reverse()];
+            return BitConverter.ToUInt64(bytes, 0);
+        }
+    }
     public void WriteBytes(byte[] data, ulong offset)
     {
-        if (data.Length > MaximumTransferSize)
-            WriteBytesLarge(data, offset);
-        else
+       
             lock (_sync)
             {
                 SendInternal(Poke((uint)offset, data));
@@ -107,19 +121,7 @@ public class bot
             }
         
     }
-    private void WriteBytesLarge(byte[] data, ulong offset)
-    {
-        int byteCount = data.Length;
-        for (int i = 0; i < byteCount; i += MaximumTransferSize)
-            WriteBytes(SubArray(data, i, MaximumTransferSize), offset + (uint)i);
-    }
-    private static T[] SubArray<T>(T[] data, int index, int length)
-    {
-        if (index + length > data.Length)
-            length = data.Length - index;
-        T[] result = new T[length];
-        Array.Copy(data, index, result, 0, length);
-        return result;
-    }
+
+    public static byte[] MainPointer(long[] jumps) => Encode($"pointer{string.Concat(jumps.Select(z => $" {z}"))}");
     public static byte[] Poke(uint offset, byte[] data) => Encode($"poke 0x{offset:X8} 0x{string.Concat(data.Select(z => $"{z:X2}"))}");
 }

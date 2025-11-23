@@ -71,6 +71,36 @@ namespace ShinyStashMap.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LysandreLabs {
+            get {
+                object obj = ResourceManager.GetObject("LysandreLabs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sewers {
+            get {
+                object obj = ResourceManager.GetObject("Sewers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SewersB {
+            get {
+                object obj = ResourceManager.GetObject("SewersB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [
         ///  &quot;Académie Étoile - 2C8F09E845C684AB - spn_outzone_a0402_F50 @ V3f(-601.8332, 17.073677, -245.40312)&quot;,
         ///  &quot;Académie Étoile - 8E1E54E639254540 - spn_outzone_a0402_350 @ V3f(-586.5218, 9, -331.4405)&quot;,
@@ -81,6 +111,52 @@ namespace ShinyStashMap.Properties {
         internal static string t1_point_spawners {
             get {
                 return ResourceManager.GetString("t1_point_spawners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  &quot;Lysandre Labs - 458B06D6DEFBB6BB - spn_d01_01_132 @ V3f(-41.485657, 0.010707984, 128.7104)&quot;,
+        ///  &quot;Lysandre Labs - 458B07D6DEFBB86E - spn_d01_01_131 @ V3f(-27.826118, 0.007836487, 132.92783)&quot;,
+        ///  &quot;Lysandre Labs - 45957BD6DF04D20F - spn_d01_01_161 @ V3f(19.539917, 0.00056232495, 7.6750245)&quot;,
+        ///  &quot;Lysandre Labs - 45957CD6DF04D3C2 - spn_d01_01_162 @ V3f(-38.086994, 0.002034003, 52.064537)&quot;,
+        ///  &quot;Lysandre Labs - 459C07D6DF0A2BA1 - spn_d01_01_141 @ V3f(-38.310757, 0.14775105, 141.85071)&quot;,
+        ///  &quot;Lysandre Labs - 4 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string t2_point_spawners {
+            get {
+                return ResourceManager.GetString("t2_point_spawners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  &quot;The Sewers - A500D399728CD066 - spn_d02_01_022 @ V3f(-13.7, 0, -150)&quot;,
+        ///  &quot;The Sewers - A500D499728CD219 - spn_d02_01_023 @ V3f(-28.896324, 4.222, -139.296)&quot;,
+        ///  &quot;The Sewers - A5045499728FE170 - spn_d02_01_033 @ V3f(-27.5, 0, -60)&quot;,
+        ///  &quot;The Sewers - A5045599728FE323 - spn_d02_01_032 @ V3f(-30, 0, -35)&quot;,
+        ///  &quot;The Sewers - A5045699728FE4D6 - spn_d02_01_031 @ V3f(-1.75, 0, -43.8)&quot;,
+        ///  &quot;The Sewers - A5045899728FE83C - spn_d02_01_037 @ V3f(83.94659, 0, -181.1168)&quot;,
+        ///  &quot;The Sewers - A5045999728FE9EF - spn_d0 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string t3_point_spawners {
+            get {
+                return ResourceManager.GetString("t3_point_spawners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   &quot;The Sewers - BDE65CBAD11A80B3 - spn_d02_02_031 @ V3f(-70, 3.1, -40)&quot;,
+        ///  &quot;The Sewers - BDE65DBAD11A8266 - spn_d02_02_032 @ V3f(-80, 3.1, -30)&quot;,
+        ///  &quot;The Sewers - BDE65EBAD11A8419 - spn_d02_02_033 @ V3f(-76.97733, 3.1074047, -26.753216)&quot;,
+        ///  &quot;The Sewers - BDE9DEBAD11D9370 - spn_d02_02_023 @ V3f(-62.4699, 3.0331113, -23.7024)&quot;,
+        ///  &quot;The Sewers - BDE9DFBAD11D9523 - spn_d02_02_022 @ V3f(-0.44469738, -0.2396127, -42.71759)&quot;,
+        ///  &quot;The Sewers - BDE9E0BAD11D96D6 - spn_d02_02_021 @ V3f(-31.40034, 0.1, -46.06428)&quot;,
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string t4_point_spawners {
+            get {
+                return ResourceManager.GetString("t4_point_spawners", resourceCulture);
             }
         }
     }

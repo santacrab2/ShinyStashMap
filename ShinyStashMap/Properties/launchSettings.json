@@ -2,10 +2,6 @@
   "profiles": {
     "ShinyStashMap": {
       "commandName": "Project"
-    },
-    "Profile 1": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Users\\skara\\Desktop\\PKHeX\\PKHeX.exe"
     }
   }
 }
