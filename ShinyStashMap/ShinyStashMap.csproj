@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup>
+	<DebugType>portable</DebugType>
+	<EmbedAllSources>true</EmbedAllSources>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\lumiose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\t1_point_spawners.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PKHeX.Core" Version="25.11.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PKHeX.Drawing">
+      <HintPath>F:\repos\PKHeX\PKHeX.Drawing.PokeSprite\bin\Release\net9.0-windows\PKHeX.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="PKHeX.Drawing.PokeSprite">
+      <HintPath>F:\repos\PKHeX\PKHeX.Drawing.PokeSprite\bin\Release\net9.0-windows\PKHeX.Drawing.PokeSprite.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\lumiose.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
