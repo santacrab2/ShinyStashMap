@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="PKHeX.Drawing">
-      <HintPath>F:\repos\PKHeX\PKHeX.Drawing.PokeSprite\bin\Release\net9.0-windows\PKHeX.Drawing.dll</HintPath>
-    </Reference>
     <Reference Include="PKHeX.Drawing.PokeSprite">
-      <HintPath>F:\repos\PKHeX\PKHeX.Drawing.PokeSprite\bin\Release\net9.0-windows\PKHeX.Drawing.PokeSprite.dll</HintPath>
+      <HintPath>deps\PKHeX.Drawing.PokeSprite.dll</HintPath>
     </Reference>
   </ItemGroup>
 
