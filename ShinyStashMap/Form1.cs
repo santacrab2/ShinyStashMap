@@ -51,7 +51,10 @@ public partial class Form1 : Form
         int i = 0;
         while (BitConverter.ToString(ShinyBlock.Data[i..(i + 8)].ToArray()).Replace("-", "") != "45262284E49CF2CB" && (i + 0x1F0) < ShinyBlock.Data.Length)
         {
-            ShinyEntities.Add((new PA9(ShinyBlock.Data[(i + 0x8)..(i + 0x8 + 0x158)].ToArray()), ShinyBlock.Data[i..(i + 8)].ToArray()));
+            var pk = new PA9(ShinyBlock.Data[(i + 0x8)..(i + 0x8 + 0x158)].ToArray());
+            var hash = ShinyBlock.Data[i..(i + 8)].ToArray();
+            if (!ShinyEntities.Any(e => e.Item1.EncryptionConstant == pk.EncryptionConstant && e.Item2.SequenceEqual(hash)))
+                ShinyEntities.Add((pk, hash));
             i += 0x1F0;
         }
         SetPBs();
@@ -174,7 +177,7 @@ public partial class Form1 : Form
 
         foreach (var line in lines)
         {
-           
+
             string hash = hashRe.Match(line).Groups[1].Value;
 
             var m = v3fRe.Match(line);
@@ -190,7 +193,7 @@ public partial class Form1 : Form
             Buffer.BlockCopy(BitConverter.GetBytes(z), 0, bytes, 8, 4);
 
             dict[hash] = (bytes, new float[] { x, y, z });
-            
+
         }
         return dict;
     }
